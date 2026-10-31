@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards - Verbes Vandertramp</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            width: 100%;
+            padding: 1.5rem 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-bar a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.375rem;
+            background-color: #e0e7ff;
+            transition: background-color 0.2s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #c7d2fe;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-width;
+            width: 100%;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            justify-content: space-between;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 320px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: var(--shadow);
+            border-radius: 1rem;
+            background-color: var(--card-bg);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background-color: var(--card-bg);
+        }
+
+        .card-back {
+            background-color: #f1f5f9;
+            transform: rotateY(180deg);
+        }
+
+        .verb-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .auxiliary {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 0.5rem;
+        }
+
+        .participle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .hint {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-know {
+            background-color: var(--success);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-retry {
+            background-color: var(--danger);
+            color: white;
+            flex: 1;
+        }
+
+        .completion-screen {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>⚡ Flashcards Vandertramp</h1>
+        <p style="color: var(--text-muted); margin: 0.5rem 0 0 0;">Testez votre maîtrise des verbes avec l'auxiliaire ÊTRE</p>
+        <div class="nav-bar">
+            <a href="french_flashcards_100.html">🏠 Vocabulaire (100)</a>
+            <a href="conjugaisons.html">📖 Guide des Conjugaisons</a>
+            <a href="vandertramp_flashcards.html">⚡ Flashcards Vandertramp</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats-bar" id="stats-bar">
+            <span id="card-counter">Carte 1 sur 16</span>
+            <span id="score-counter">Maîtrisées : 0</span>
+        </div>
+
+        <div class="card-container" id="card-container" onclick="flipCard()">
+            <div class="flashcard" id="flashcard">
+                <div class="card-face card-front">
+                    <p class="hint">Infinitif du verbe :</p>
+                    <h2 class="verb-title" id="card-verb"></h2>
+                    <p class="hint" style="margin-top: 2rem;">Cliquez pour voir l'auxiliaire et le participe</p>
+                </div>
+                <div class="card-face card-back">
+                    <p class="hint">Passé Composé :</p>
+                    <div class="auxiliary" id="card-aux"></div>
+                    <div class="participle" id="card-part"></div>
+                    <button style="margin-top: 1.5rem; background:#e0e7ff; color:var(--primary);" onclick="event.stopPropagation(); playAudio()">🔊 Écouter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls" id="action-controls">
+            <button class="btn-retry" onclick="nextCard(false)">À revoir</button>
+            <button class="btn-know" onclick="nextCard(true)">Maîtrisé !</button>
+        </div>
+
+        <div class="completion-screen hidden" id="completion-screen">
+            <h2>🎉 Session Vandertramp Terminée !</h2>
+            <p id="final-stats"></p>
+            <button class="btn-know" style="margin-top: 1rem;" onclick="restartDeck()">Recommencer</button>
+        </div>
+    </div>
+
+    <script>
+        const vandertrampDeck = [
+            { verb: "Devenir", aux: "Être", participle: "Devenu(e)(s)" },
+            { verb: "Revenir", aux: "Être", participle: "Revenu(e)(s)" },
+            { verb: "Monter", aux: "Être", participle: "Monté(e)(s)" },
+            { verb: "Rester", aux: "Être", participle: "Resté(e)(s)" },
+            { verb: "Sortir", aux: "Être", participle: "Sorti(e)(s)" },
+            { verb: "Venir", aux: "Être", participle: "Venu(e)(s)" },
+            { verb: "Arriver", aux: "Être", participle: "Arrivé(e)(s)" },
+            { verb: "Naître", aux: "Être", participle: "Né(e)(s)" },
+            { verb: "Descendre", aux: "Être", participle: "Descendu(e)(s)" },
+            { verb: "Entrer", aux: "Être", participle: "Entré(e)(s)" },
+            { verb: "Retourner", aux: "Être", participle: "Retourné(e)(s)" },
+            { verb: "Tomber", aux: "Être", participle: "Tombé(e)(s)" },
+            { verb: "Rentrer", aux: "Être", participle: "Rentré(e)(s)" },
+            { verb: "Aller", aux: "Être", participle: "Allé(e)(s)" },
+            { verb: "Mourir", aux: "Être", participle: "Mort(e)(s)" },
+            { verb: "Partir", aux: "Être", participle: "Parti(e)(s)" }
+        ];
+
+        let currentIndex = 0;
+        let masteredCount = 0;
+        let isFlipped = false;
+
+        const flashcardEl = document.getElementById('flashcard');
+        const cardVerbEl = document.getElementById('card-verb');
+        const cardAuxEl = document.getElementById('card-aux');
+        const cardPartEl = document.getElementById('card-part');
+        const cardCounterEl = document.getElementById('card-counter');
+        const scoreCounterEl = document.getElementById('score-counter');
+        const cardContainer = document.getElementById('card-container');
+        const actionControls = document.getElementById('action-controls');
+        const statsBar = document.getElementById('stats-bar');
+        const completionScreen = document.getElementById('completion-screen');
+        const finalStats = document.getElementById('final-stats');
+
+        function loadCard() {
+            const current = vandertrampDeck[currentIndex];
+            cardVerbEl.textContent = current.verb;
+            cardAuxEl.textContent = `Auxiliaire : ${current.aux}`;
+            cardPartEl.textContent = `Participe passé : ${current.participle}`;
+            cardCounterEl.textContent = `Carte ${currentIndex + 1} sur ${vandertrampDeck.length}`;
+            scoreCounterEl.textContent = `Maîtrisées : ${masteredCount}`;
+            
+            isFlipped = false;
+            flashcardEl.classList.remove('flipped');
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                flashcardEl.classList.add('flipped');
+            } else {
+                flashcardEl.classList.remove('flipped');
+            }
+        }
+
+        function playAudio() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(vandertrampDeck[currentIndex].verb);
+                utterance.lang = 'fr-FR';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function nextCard(known) {
+            if (known) masteredCount++;
+            currentIndex++;
+            if (currentIndex < vandertrampDeck.length) {
+                loadCard();
+            } else {
+                showCompletion();
+            }
+        }
+
+        function showCompletion() {
+            cardContainer.classList.add('hidden');
+            actionControls.classList.add('hidden');
+            statsBar.classList.add('hidden');
+            completionScreen.classList.remove('hidden');
+            finalStats.textContent = `Vous avez maîtrisé ${masteredCount} sur ${vandertrampDeck.length} verbes Vandertramp !`;
+        }
+
+        function restartDeck() {
+            currentIndex = 0;
+            masteredCount = 0;
+            cardContainer.classList.remove('hidden');
+            actionControls.classList.remove('hidden');
+            statsBar.classList.remove('hidden');
+            completionScreen.classList.add('hidden');
+            loadCard();
+        }
+
+        window.onload = loadCard;
+    </script>
+</body>
+</html>
