@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide des Conjugaisons & Vandertramp</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            width: 100%;
+            padding: 1.5rem 0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-bar a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.375rem;
+            background-color: #e0e7ff;
+            transition: background-color 0.2s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #c7d2fe;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        ul {
+            line-height: 1.8;
+        }
+
+        .vandertramp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .vandertramp-grid li {
+            background: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .vandertramp-grid span {
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📖 Guide de Référence des Verbes</h1>
+        <p style="color: var(--text-muted); margin: 0.5rem 0 0 0;">Maîtrisez les structures clés et les verbes d'état (Passé Composé)</p>
+        <div class="nav-bar">
+            <a href="french_flashcards_100.html">🏠 Vocabulaire (100)</a>
+            <a href="conjugaisons.html">📖 Guide des Conjugaisons</a>
+            <a href="vandertramp_flashcards.html">⚡ Flashcards Vandertramp</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Section 1: Standard Conjugations Overview -->
+        <div class="card">
+            <h2>1. Les Groupes de Verbes (Présent de l'Indicatif)</h2>
+            <p>En français, les verbes réguliers se divisent en trois groupes principaux :</p>
+            <ul>
+                <li><strong>1er Groupe (-ER) :</strong> Ex: <em>Parler</em> → Je parle, tu parles, il/elle parle, nous parlons, vous parlez, ils/elles parlent.</li>
+                <li><strong>2e Groupe (-IR avec -issant au participe présent) :</strong> Ex: <em>Finir</em> → Je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent.</li>
+                <li><strong>3e Groupe (Irréguliers / -RE, -OIR, -IR) :</strong> Ex: <em>Aller,venir, prendre, vouloir</em> → Changent de radical fréquemment.</li>
+            </ul>
+        </div>
+
+        <!-- Section 2: Dr & Mrs Vandertramp -->
+        <div class="card">
+            <h2>2. La Règle d'Or : DR & MRS VANDERTRAMP</h2>
+            <p>Au <strong>passé composé</strong>, la grande majorité des verbes utilisent l'auxiliaire <em>Avoir</em>. Cependant, les 16 verbes de la maison de <strong>Dr. & Mrs. Vandertramp</strong> (ainsi que tous les verbes pronominaux) utilisent l'auxiliaire <strong>Être</strong> et nécessitent l'accord en genre et en nombre du participe passé.</p>
+            
+            <ul class="vandertramp-grid">
+                <li>Devenir <span>(Je suis devenu/e)</span></li>
+                <li>Revenir <span>(Je suis revenu/e)</span></li>
+                <li>Monter <span>(Je suis monté/e)</span></li>
+                <li>Rester <span>(Je suis resté/e)</span></li>
+                <li>Sortir <span>(Je suis sorti/e)</span></li>
+                <li>Venir <span>(Je suis venu/e)</span></li>
+                <li>Arriver <span>(Je suis arrivé/e)</span></li>
+                <li>Naître <span>(Je suis né/e)</span></li>
+                <li>Descendre <span>(Je suis descendu/e)</span></li>
+                <li>Entrer <span>(Je suis entré/e)</span></li>
+                <li>Retourner <span>(Je suis retourné/e)</span></li>
+                <li>Tomber <span>(Je suis tombé/e)</span></li>
+                <li>Rentrer <span>(Je suis rentré/e)</span></li>
+                <li>Aller <span>(Je suis allé/e)</span></li>
+                <li>Mourir <span>(Je suis mort/e)</span></li>
+                <li>Partir <span>(Je suis parti/e)</span></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
