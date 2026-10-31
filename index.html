@@ -39,6 +39,29 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Navigation Bar */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-bar a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.375rem;
+            background-color: #e0e7ff;
+            transition: background-color 0.2s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #c7d2fe;
+        }
+
         h1 {
             margin: 0;
             font-size: 1.75rem;
@@ -61,7 +84,6 @@
             padding-bottom: 3rem;
         }
 
-        /* Category Filter Buttons */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -96,7 +118,6 @@
             color: var(--text-muted);
         }
 
-        /* Flashcard Styles */
         .card-container {
             perspective: 1000px;
             width: 100%;
@@ -166,7 +187,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Controls */
         .controls {
             display: flex;
             gap: 1rem;
@@ -237,10 +257,14 @@
     <header>
         <h1>🇫🇷 100 Objets, Sport & Vie Quotidienne</h1>
         <p class="subtitle">Apprenez le français adulte par l'association visuelle directe</p>
+        <div class="nav-bar">
+            <a href="french_flashcards_100.html">🏠 Vocabulaire (100)</a>
+            <a href="conjugaisons.html">📖 Guide des Conjugaisons & Vandertramp</a>
+            <a href="vandertramp_flashcards.html">⚡ Flashcards Vandertramp</a>
+        </div>
     </header>
 
     <div class="container">
-        <!-- Category Filters -->
         <div class="filter-bar" id="filter-bar">
             <button class="filter-btn active" onclick="filterCategory('All', event)">Tout (100)</button>
             <button class="filter-btn" onclick="filterCategory('Maison', event)">Maison & Mobilier</button>
@@ -250,21 +274,17 @@
             <button class="filter-btn" onclick="filterCategory('Nombres', event)">Nombres & Chiffres</button>
         </div>
 
-        <!-- Stats and Progress -->
         <div class="stats-bar" id="stats-bar">
             <span id="card-counter">Carte 1 sur 100</span>
             <span id="score-counter">Maîtrisées : 0</span>
         </div>
 
-        <!-- Flashcard Area -->
         <div class="card-container" id="card-container" onclick="flipCard()">
             <div class="flashcard" id="flashcard">
-                <!-- Front Side: Image + Action prompt -->
                 <div class="card-face card-front">
                     <img id="card-img" src="" alt="Flashcard visual" class="card-image">
                     <p class="hint">Cliquez sur la carte pour révéler le mot</p>
                 </div>
-                <!-- Back Side: French Word + Audio -->
                 <div class="card-face card-back">
                     <h2 class="french-word" id="card-word"></h2>
                     <p class="hint" id="card-category"></p>
@@ -273,13 +293,11 @@
             </div>
         </div>
 
-        <!-- Action Buttons -->
         <div class="controls" id="action-controls">
             <button class="btn-retry" onclick="nextCard(false)">Encore besoin de pratique</button>
             <button class="btn-know" onclick="nextCard(true)">Je connais !</button>
         </div>
 
-        <!-- Completion Screen -->
         <div class="completion-screen hidden" id="completion-screen">
             <h2>🎉 Bravo ! Session Terminée</h2>
             <p id="final-stats">Vous avez examiné toutes les cartes.</p>
@@ -288,9 +306,7 @@
     </div>
 
     <script>
-        // Verified 100 Adult Daily Life, Gym, Directions & Numbers Flashcards
         const masterDeck = [
-            // Maison & Mobilier
             { word: "Une table", category: "Maison", image: "https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?w=400&auto=format&fit=crop&q=80" },
             { word: "Une chaise", category: "Maison", image: "https://images.unsplash.com/photo-1580481077494-e3299ac25e94?w=400&auto=format&fit=crop&q=80" },
             { word: "Un lit", category: "Maison", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&auto=format&fit=crop&q=80" },
@@ -312,7 +328,6 @@
             { word: "Un escalier", category: "Maison", image: "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?w=400&auto=format&fit=crop&q=80" },
             { word: "Un balcon", category: "Maison", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&auto=format&fit=crop&q=80" },
 
-            // Bureau & Travail
             { word: "Un ordinateur", category: "Bureau", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&auto=format&fit=crop&q=80" },
             { word: "Un bureau", category: "Bureau", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&auto=format&fit=crop&q=80" },
             { word: "Une chaise de bureau", category: "Bureau", image: "https://images.unsplash.com/photo-1580481077494-e3299ac25e94?w=400&auto=format&fit=crop&q=80" },
@@ -334,7 +349,6 @@
             { word: "Une réunion", category: "Bureau", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&auto=format&fit=crop&q=80" },
             { word: "Un patron", category: "Bureau", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" },
 
-            // Sport & Salle de gym
             { word: "Des haltères", category: "Sport", image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=400&auto=format&fit=crop&q=80" },
             { word: "Un tapis de course", category: "Sport", image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&auto=format&fit=crop&q=80" },
             { word: "Un vélo d'appartement", category: "Sport", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80" },
@@ -361,7 +375,6 @@
             { word: "Soulever du poids", category: "Sport", image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&auto=format&fit=crop&q=80" },
             { word: "L'énergie", category: "Sport", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80" },
 
-            // Directions & Espace
             { word: "À gauche", category: "Directions", image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=400&auto=format&fit=crop&q=80" },
             { word: "À droite", category: "Directions", image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=400&auto=format&fit=crop&q=80" },
             { word: "Tout droit", category: "Directions", image: "https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?w=400&auto=format&fit=crop&q=80" },
@@ -383,7 +396,6 @@
             { word: "Une pharmacie", category: "Directions", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=80" },
             { word: "Un supermarché", category: "Directions", image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=400&auto=format&fit=crop&q=80" },
 
-            // Nombres & Chiffres
             { word: "Un", category: "Nombres", image: "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400&auto=format&fit=crop&q=80" },
             { word: "Deux", category: "Nombres", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&auto=format&fit=crop&q=80" },
             { word: "Trois", category: "Nombres", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&auto=format&fit=crop&q=80" },
